@@ -57,7 +57,7 @@ const loginUser = async (req, res) => {
     const token = jwt.sign(userForToken, process.env.SECRET);
 
     // let user = await UserSchema.findOne({ email, password });
-    res.status(200).json({token,email: user.email });
+    res.status(200).json({ token, email: user.email });
   } catch (error) {
     res.status(500).json({ msg: error });
   }

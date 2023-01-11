@@ -17,6 +17,24 @@ const userSchemaFunc = Schema({
     required: [true, "cant be empty"],
     trim: true,
   },
+  notes: {
+    type: Schema.Types.ObjectId,
+    ref: "NotSchema",
+  },
+});
+
+const noteSchemaFunc = new Schema({
+  content: {
+    type: String,
+    required: [true, "cant be empty"],
+    minlength: 5,
+  },
+  date: Date,
+  users: {
+    type: Schema.Types.ObjectId,
+    ref: "UserSchema",
+  },
 });
 
 module.exports = model("UserSchema", userSchemaFunc);
+module.exports = model("NoteSchema", noteSchemaFunc);
