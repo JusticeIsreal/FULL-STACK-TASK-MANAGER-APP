@@ -72,15 +72,29 @@ const loginUser = async (req, res) => {
   }
 };
 
+// post a note
+
 const postANote = async (req, res) => {
   try {
     const body = req.body;
-    const user = await UserSchema.findById(body.userId);
+    const auth = req.headers.authorization;
+
+    if (!auth || !auth.startsWith("Bearer ")) {
+      res.status(401).json({ msg: "token missing" });
+    }
+
+    const token = auth.split(" ")[1];
+
+    const userData = jwt.verify(token, process.env.SECRET);
+    if (!userData) {
+      res.status(401).json({ msg: "token missing" });
+    }
+
+    const user = await UserSchema.findById(userData.id);
 
     if (!user) {
       return res.status(404).json({ msg: "user not found" });
     }
-
     const notes = new NoteSchema({
       content: body.content,
       date: new Date(),
