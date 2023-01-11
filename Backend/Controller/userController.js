@@ -1,34 +1,43 @@
 const UserSchema = require("../models/userSchema");
+const NoteSchema = require("../models/noteSchema");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-// post user
+// get all users
+
+const getAllUsers = async (req, res) => {
+  const users = await UserSchema.find({}).populate("note");
+  res.status(200).json({ users });
+};
+
+// register user
+
 const addUser = async (req, res) => {
   const { name, email, password } = req.body;
 
-  //check email doesnt exit in database
-  const user = await UserSchema.findOne({ email: email });
-
-  if (user) {
-    return res.status(400).json({
-      error: "User already exists",
-    });
+  const existingUser = await UserSchema.findOne({ email: email });
+  if (existingUser) {
+    return res
+      .status(400)
+      .json({ error: `${email} has been taken by another user ` });
   }
-
-  //create user
 
   try {
     const rounds = 10;
     const hashPassword = await bcrypt.hash(password, rounds);
 
-    let user = await UserSchema.create({ name, email, password: hashPassword });
-    res.status(200).json({ user });
+    let users = await UserSchema.create({
+      name,
+      email,
+      password: hashPassword,
+    });
+    res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ msg: error });
   }
 };
 
-// get one
+// login
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -63,7 +72,34 @@ const loginUser = async (req, res) => {
   }
 };
 
+const postANote = async (req, res) => {
+  try {
+    const body = req.body;
+    const user = await UserSchema.findById(body.userId);
+
+    if (!user) {
+      return res.status(404).json({ msg: "user not found" });
+    }
+
+    const notes = new NoteSchema({
+      content: body.content,
+      date: new Date(),
+      user: user._id,
+    });
+
+    const savedNote = await notes.save();
+    user.note.push(savedNote);
+    await user.save();
+
+    res.json(savedNote);
+  } catch (error) {
+    res.status(500).json({ msg: error });
+  }
+};
+
 module.exports = {
+  getAllUsers,
   addUser,
   loginUser,
+  postANote,
 };
