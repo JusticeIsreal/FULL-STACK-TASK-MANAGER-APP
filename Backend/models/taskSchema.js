@@ -5,8 +5,12 @@ const taskSchemaFunc = Schema({
   name: {
     type: String,
     required: [true, "cant be emoty"],
-    maxlength: [5 , "must not be greater than 10"],
+    maxlength: [5, "must not be greater than 10"],
     trim: true,
+  },
+  status: {
+    type: String,
+    default: "Open",
   },
   completed: {
     type: Boolean,
@@ -14,9 +18,8 @@ const taskSchemaFunc = Schema({
   },
   user: {
     type: Schema.Types.ObjectId,
-    ref: "User",
-}
-  
+    ref: "UserSchema",
+  },
 });
 
 module.exports = model("TaskSchema", taskSchemaFunc);

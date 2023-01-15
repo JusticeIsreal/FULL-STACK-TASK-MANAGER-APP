@@ -23,9 +23,15 @@ const userSchemaFunc = Schema({
       ref: "NoteSchema",
     },
   ],
+  task: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "TaskSchema",
+    },
+  ],
 });
 
 
 
-module.exports = model("UserSchema", userSchemaFunc);
+module.exports = mongoose.model("UserSchema", userSchemaFunc);
 // module.exports = model("NoteSchema", noteSchemaFunc);
