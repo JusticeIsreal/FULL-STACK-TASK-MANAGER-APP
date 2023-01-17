@@ -18,16 +18,16 @@ export const AppContextProvider = ({ children }) => {
 
   // fetch all task
   const [data, setData] = useState([]);
-  const fetchTasks = async () => {
-    await axios
-      .get("http://localhost:1234/api/v1/tasks")
-      .then((response) => setData(response.data.tasks))
-      .catch((error) => console.error(error));
-    // console.log(data);
-  };
-  useEffect(() => {
-    fetchTasks();
-  }, []);
+  // const fetchTasks = async () => {
+  //   await axios
+  //     .get("http://localhost:1234/api/v1/tasks")
+  //     .then((response) => setData(response.data.tasks))
+  //     .catch((error) => console.error(error));
+  //    console.log(data);
+  // };
+  // useEffect(() => {
+  //   fetchTasks();
+  // }, []);
 
   // task input fields
   const taskInput = (e) => {

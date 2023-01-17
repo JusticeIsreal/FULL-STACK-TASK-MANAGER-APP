@@ -1,8 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function LoginForm() {
   const [user, setUser] = useState(false);
+  const [errorMessage, setErrorMesssage] = useState("");
   const [useremail, setUseremail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -18,34 +20,54 @@ function LoginForm() {
         window.location.href = "./tasks";
       })
       .catch((error) => {
+        console.log(error.response.data.error);
+        setErrorMesssage(error.response.data.error);
         throw error;
       });
   };
 
   return (
-    <div>
-      <h1>Login</h1>
+    <div className="login-page">
+      <h1 className="login-page-logo">TM</h1>
+      <div className="login-page-quote-con">
+        <h3 className="login-page-quote">Login to your account</h3>
+        <p className="login-page-txt">{errorMessage}</p>
+      </div>
 
-      <form onSubmit={(event) => logIn(event)}>
-        <div>
-          email
+      <form onSubmit={(event) => logIn(event)} className="login-page-form">
+        <div className="login-page-email-con">
+          <label>Email</label>
           <input
+            placeholder="John@gmail.com"
             type="email"
             value={useremail}
             name="Username"
             onChange={({ target }) => setUseremail(target.value)}
           />
         </div>
-        <div>
-          password
+        <div className="login-page-password-con">
+          <label>Password</label>
           <input
+            placeholder="**********"
             type="password"
             value={password}
             name="Password"
             onChange={({ target }) => setPassword(target.value)}
           />
         </div>
-        <button type="submit">login</button>
+        <p className="login-page-forgot-password-txt">Forgot Password</p>
+        <div className="login-page-sunmit-btn-con">
+          <button type="submit" className="login-page-submit-btn">
+            log In
+          </button>
+        </div>
+
+        <p className="login-page-register-btn">
+          Don't have an account ?
+          <Link to="/register">
+            <span> Register</span>
+          </Link>
+        </p>
       </form>
     </div>
   );

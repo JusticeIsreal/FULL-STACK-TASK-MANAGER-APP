@@ -1,0 +1,249 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  font-family: "Orbitron", sans-serif;
+}
+
+body {
+  height: 100vh;
+}
+
+*::-webkit-scrollbar {
+  height: 0.5rem;
+  width: 1px;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: rgba(245, 245, 245, 0);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(65, 105, 225, 0);
+}
+
+.App {
+  overflow: hidden;
+}
+.App .starting-page {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  background-color: #0d60d8;
+}
+.App .starting-page .starting-page-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 25%;
+  margin: 0 auto;
+}
+.App .starting-page .starting-page-logo-container .starting-page-logo {
+  color: white;
+  font-size: 60px;
+  font-weight: bolder;
+  text-align: center;
+}
+@media only screen and (min-width: 850px) {
+  .App .starting-page .starting-page-logo-container .starting-page-logo {
+    font-size: 100px;
+  }
+}
+.App .starting-page .starting-page-quote-container {
+  color: white;
+  margin-top: -30vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.App .starting-page .starting-page-quote-container .starting-page-quote {
+  text-align: center;
+  font-size: 30px;
+}
+@media only screen and (min-width: 850px) {
+  .App .starting-page .starting-page-quote-container .starting-page-quote {
+    font-size: 40px;
+  }
+}
+.App .starting-page .starting-page-quote-container .starting-page-txt-container {
+  text-align: center;
+  margin-top: 20px;
+  width: 80%;
+  color: #99b3d6;
+}
+@media only screen and (min-width: 850px) {
+  .App .starting-page .starting-page-quote-container .starting-page-txt-container {
+    font-size: 20px;
+    margin-top: 30px;
+  }
+}
+.App .starting-page .starting-page-bttn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 80%;
+  margin-bottom: 100px;
+}
+@media only screen and (min-width: 850px) {
+  .App .starting-page .starting-page-bttn-container {
+    width: 600px;
+  }
+}
+.App .starting-page .starting-page-bttn-container .starting-page-create-acc-container {
+  width: 100%;
+  height: 50px;
+  margin: 10px;
+  color: #0d60d8;
+  font-size: 20px;
+}
+.App .starting-page .starting-page-bttn-container .starting-page-create-acc-container button {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border: none;
+  color: #0d60d8;
+  font-size: 20px;
+}
+.App .starting-page .starting-page-bttn-container .starting-page-create-acc-container button:hover {
+  background-color: #0d60d8;
+  color: white;
+  border: none;
+  border: 2px solid white;
+}
+.App .starting-page .starting-page-bttn-container .starting-page-login-container {
+  width: 100%;
+  height: 50px;
+  margin: 10px;
+  font-size: 20px;
+  color: white;
+  background-color: #0d60d8;
+}
+.App .starting-page .starting-page-bttn-container .starting-page-login-container button {
+  width: 100%;
+  height: 100%;
+  background-color: #0d60d8;
+  border: none;
+  color: white;
+  font-size: 20px;
+  border: 2px solid white;
+}
+.App .starting-page .starting-page-bttn-container .starting-page-login-container button:hover {
+  color: #0d60d8;
+  background-color: white;
+  border: none;
+}
+.App .login-page {
+  padding: 10px;
+  color: #0d60d8;
+  width: 100%;
+  height: 100%;
+}
+.App .login-page .login-page-logo {
+  text-align: center;
+  font-size: 30px;
+}
+@media only screen and (min-width: 850px) {
+  .App .login-page .login-page-logo {
+    font-size: 40px;
+  }
+}
+.App .login-page .login-page-quote-con {
+  margin-top: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.App .login-page .login-page-quote-con .login-page-quote {
+  text-align: center;
+  font-size: 30px;
+}
+@media only screen and (min-width: 850px) {
+  .App .login-page .login-page-quote-con .login-page-quote {
+    font-size: 40px;
+  }
+}
+.App .login-page .login-page-quote-con .login-page-txt {
+  text-align: center;
+  margin-top: 20px;
+  width: 80%;
+  color: red;
+}
+@media only screen and (min-width: 850px) {
+  .App .login-page .login-page-quote-con .login-page-txt {
+    font-size: 20px;
+    margin-top: 30px;
+  }
+}
+.App .login-page .login-page-form {
+  padding: 5px;
+  margin: 0 auto;
+  margin-top: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 80%;
+}
+@media only screen and (min-width: 850px) {
+  .App .login-page .login-page-form {
+    width: 600px;
+  }
+}
+.App .login-page .login-page-form .login-page-email-con,
+.App .login-page .login-page-form .login-page-password-con {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 100%;
+  margin: 10px;
+}
+.App .login-page .login-page-form .login-page-email-con input,
+.App .login-page .login-page-form .login-page-password-con input {
+  width: 100%;
+  height: 40px;
+  padding: 7px;
+  font-size: 20px;
+  border: 1px solid #0d60d8;
+}
+.App .login-page .login-page-form .login-page-forgot-password-txt {
+  right: 0;
+  align-self: flex-end;
+}
+.App .login-page .login-page-form .login-page-sunmit-btn-con {
+  width: 100%;
+  height: 50px;
+  margin: 10px;
+  font-size: 20px;
+  color: white;
+  background-color: #0d60d8;
+  border: 2px solid white;
+}
+.App .login-page .login-page-form .login-page-sunmit-btn-con:hover {
+  color: #0d60d8;
+  border: none;
+}
+.App .login-page .login-page-form .login-page-sunmit-btn-con .login-page-submit-btn {
+  width: 100%;
+  height: 100%;
+  background-color: #0d60d8;
+  border: none;
+  color: white;
+  font-size: 20px;
+}
+.App .login-page .login-page-form .login-page-register-btn {
+  color: black;
+}
+.App .login-page .login-page-form .login-page-register-btn span {
+  color: #0d60d8;
+}/*# sourceMappingURL=Styles.css.map */

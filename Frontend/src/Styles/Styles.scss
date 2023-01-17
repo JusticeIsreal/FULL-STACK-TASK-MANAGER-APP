@@ -1,0 +1,286 @@
+// @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap");
+// global variables
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  font-family: "Orbitron", sans-serif;
+  // font-family: poppins;
+}
+
+body {
+  height: 100vh;
+  // border: 5px solid red;
+  //   max-width: 1700px;
+  //   max-height: 1500px;
+  // background-color: rgba(178, 146, 57, 0.634);
+}
+
+*::-webkit-scrollbar {
+  height: 0.5rem;
+  width: 1px;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: rgba(245, 245, 245, 0);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(65, 105, 225, 0);
+}
+
+// GLOBAL STYLES
+$shadow: 4px 4px 10px rgba(65, 105, 225, 0.089);
+$border: 2px solid rgb(214, 214, 214);
+$bg: rgba(13, 21, 34, 0.694);
+$Sides: rgba(18, 29, 47, 0.694);
+$hover-Text-Color: #444444;
+$text-Color: rgb(68, 68, 68);
+$special-text-Color: royalblue;
+$special-Color: #4c5eff;
+
+@mixin flexDisplay($justifyProp, $alignProp, $flexDirection) {
+  display: flex;
+  justify-content: $justifyProp;
+  align-items: $alignProp;
+  flex-direction: $flexDirection;
+}
+
+@mixin responsive($breakpoint) {
+  @if $breakpoint==smallPhone {
+    @media only screen and (max-width: 300px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint==tablet {
+    @media only screen and (min-width: 850px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint==bigphone {
+    @media only screen and (min-width: 750px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint==desktop {
+    @media only screen and (min-width: 1280px) {
+      @content;
+    }
+  }
+}
+
+.App {
+  overflow: hidden;
+  // starting page styles
+  .starting-page {
+    @include flexDisplay(space-between, center, column);
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    background-color: #0d60d8;
+    .starting-page-logo-container {
+      @include flexDisplay(center, center, row);
+      width: 25%;
+      margin: 0 auto;
+
+      .starting-page-logo {
+        color: white;
+        font-size: 60px;
+        font-weight: bolder;
+        text-align: center;
+
+        @include responsive(tablet) {
+          font-size: 100px;
+        }
+      }
+    }
+
+    .starting-page-quote-container {
+      color: white;
+      margin-top: -30vh;
+      @include flexDisplay(center, center, column);
+      .starting-page-quote {
+        text-align: center;
+        // color: black;
+        font-size: 30px;
+        @include responsive(tablet) {
+          font-size: 40px;
+        }
+      }
+      .starting-page-txt-container {
+        text-align: center;
+        margin-top: 20px;
+        width: 80%;
+        color: #99b3d6;
+
+        @include responsive(tablet) {
+          font-size: 20px;
+          margin-top: 30px;
+        }
+      }
+    }
+
+    .starting-page-bttn-container {
+      @include flexDisplay(center, center, column);
+      width: 80%;
+      margin-bottom: 100px;
+
+      @include responsive(tablet) {
+        width: 600px;
+      }
+      .starting-page-create-acc-container {
+        width: 100%;
+        height: 50px;
+        margin: 10px;
+        color: #0d60d8;
+        font-size: 20px;
+
+        button {
+          width: 100%;
+          height: 100%;
+          background-color: white;
+          border: none;
+          color: #0d60d8;
+          font-size: 20px;
+
+          &:hover {
+            background-color: #0d60d8;
+            color: white;
+            border: none;
+            border: 2px solid white;
+          }
+        }
+      }
+      .starting-page-login-container {
+        width: 100%;
+        height: 50px;
+        margin: 10px;
+        font-size: 20px;
+        color: white;
+        background-color: #0d60d8;
+
+        button {
+          width: 100%;
+          height: 100%;
+          background-color: #0d60d8;
+          border: none;
+          color: white;
+          font-size: 20px;
+          border: 2px solid white;
+          &:hover {
+            color: #0d60d8;
+            background-color: white;
+            border: none;
+          }
+        }
+      }
+    }
+  }
+
+  .login-page {
+    padding: 10px;
+    color: #0d60d8;
+    // @include flexDisplay(center, center, column);
+    width: 100%;
+    height: 100%;
+
+    .login-page-logo {
+      text-align: center;
+      font-size: 30px;
+      @include responsive(tablet) {
+        font-size: 40px;
+      }
+    }
+    .login-page-quote-con {
+      margin-top: 10vh;
+      @include flexDisplay(center, center, column);
+
+      .login-page-quote {
+        text-align: center;
+        // margin-top: -30vh;
+        // color: black;
+        font-size: 30px;
+        @include responsive(tablet) {
+          font-size: 40px;
+        }
+      }
+      .login-page-txt {
+        text-align: center;
+        margin-top: 20px;
+        width: 80%;
+        color: red;
+
+        @include responsive(tablet) {
+          font-size: 20px;
+          margin-top: 30px;
+        }
+      }
+    }
+    .login-page-form {
+      //   border: 1px solid #0d60d8;
+      padding: 5px;
+      margin: 0 auto;
+      margin-top: 10vh;
+      @include flexDisplay(center, center, column);
+      width: 80%;
+
+      @include responsive(tablet) {
+        width: 600px;
+      }
+
+      .login-page-email-con,
+      .login-page-password-con {
+        @include flexDisplay(center, flex-start, column);
+        width: 100%;
+        margin: 10px;
+
+        input {
+          width: 100%;
+          height: 40px;
+          padding: 7px;
+          font-size: 20px;
+          border: 1px solid #0d60d8;
+        }
+      }
+      .login-page-forgot-password-txt {
+        right: 0;
+        align-self: flex-end;
+      }
+      .login-page-sunmit-btn-con {
+        width: 100%;
+        height: 50px;
+        margin: 10px;
+        font-size: 20px;
+        color: white;
+        background-color: #0d60d8;
+        border: 2px solid white;
+        &:hover {
+          color: #0d60d8;
+          //   background-color: white;
+          border: none;
+        }
+
+        .login-page-submit-btn {
+          width: 100%;
+          height: 100%;
+          background-color: #0d60d8;
+          border: none;
+          color: white;
+          font-size: 20px;
+        }
+      }
+      .login-page-register-btn {
+        color: black;
+
+        span {
+          color: #0d60d8;
+        }
+      }
+    }
+  }
+}
