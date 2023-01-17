@@ -4,9 +4,10 @@ import axios from "axios";
 import AppContext from "../Context/AppProvider";
 function Task() {
   // functions and variables from AppProvider
-  const { data } = useContext(AppContext);
+  const { data, logOut } = useContext(AppContext);
 
   const [person, setPerson] = useState();
+  const [task, setTask] = useState();
 
   const fetchUser = async () => {
     const tokenSaved = localStorage.getItem("token");
@@ -20,8 +21,9 @@ function Task() {
         },
       })
       .then((response) => {
-        console.log(response.data.user.note);
+        console.log(response.data.user.task);
         setPerson(response.data.user);
+        setTask(response.data.user.task);
       })
       .catch((error) => console.log(error));
   };
@@ -34,7 +36,14 @@ function Task() {
   return (
     <>
       <div>
-        Welcome <h3>{person && person.name}</h3>{" "}
+        Welcome <h3>{person && person.name}</h3>
+        {task && (
+          <h3>
+            {task.map((item) => (
+              <p key={item.id}>{item.name}</p>
+            ))}
+          </h3>
+        )}
         <div>
           {person && (
             <div>
@@ -55,6 +64,8 @@ function Task() {
       ) : (
         <h1>Loading...</h1>
       )}
+
+      <button onClick={logOut}>Log Out</button>
     </>
   );
 }

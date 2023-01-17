@@ -1,6 +1,7 @@
 import { createContext, useReducer, useEffect, useState } from "react";
 import axios from "axios";
 import reducer from "./Reducer";
+import { Navigate  } from "react-router-dom";
 
 // create context instance declearation
 const AppContext = createContext();
@@ -51,6 +52,14 @@ export const AppContextProvider = ({ children }) => {
     state.newTask = "";
   };
 
+  // log out
+
+  const logOut = () => {
+    localStorage.removeItem("token");
+    window.location.reload(true);
+    // return <Navigate to="/" />;
+  };
+
   // check box functionality
   const checkBoxFunc = (e) => {
     if (e.target.checked) {
@@ -66,7 +75,15 @@ export const AppContextProvider = ({ children }) => {
 
   return (
     <AppContext.Provider
-      value={{ ...state, checkBoxFunc, data, taskInput, postTask, error }}
+      value={{
+        ...state,
+        checkBoxFunc,
+        data,
+        taskInput,
+        postTask,
+        error,
+        logOut,
+      }}
     >
       {children}
     </AppContext.Provider>

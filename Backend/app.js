@@ -23,10 +23,6 @@ app.use(cors());
 app.use("/api/v1/tasks", taskRouter);
 app.use("/api/v1/users", userRouter);
 
-app.get("/api/v1/tasks", (req, res) => {
-  res.status(200).json(data);
-});
-
 const startServer = async () => {
   try {
     await connectTaskDB(process.env.MONGODB_URL);
