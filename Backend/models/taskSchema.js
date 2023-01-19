@@ -5,7 +5,7 @@ const taskSchemaFunc = Schema({
   name: {
     type: String,
     required: [true, "cant be emoty"],
-    maxlength: [5, "must not be greater than 10"],
+    // maxlength: [5, "must not be greater than 10"],
     trim: true,
   },
   status: {

@@ -5,7 +5,6 @@ import TaskManager from "../Component/TaskManager";
 function TaskManagerProject() {
   return (
     <div>
-      <TaskManager />
       <Task />
     </div>
   );

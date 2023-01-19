@@ -1,11 +1,15 @@
+import TaskManager from "./TaskManager";
 import { useContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
+import { BiEdit } from "react-icons/bi";
+import { RiDeleteBin6Line } from "react-icons/ri";
 import AppContext from "../Context/AppProvider";
 function Task() {
   // functions and variables from AppProvider
-  const { data, logOut } = useContext(AppContext);
+  const { logOut } = useContext(AppContext);
 
+  // fetch user details
   const [person, setPerson] = useState();
   const [task, setTask] = useState();
 
@@ -21,7 +25,6 @@ function Task() {
         },
       })
       .then((response) => {
-        console.log(response.data.user.task);
         setPerson(response.data.user);
         setTask(response.data.user.task);
       })
@@ -34,67 +37,49 @@ function Task() {
     };
   }, []);
   return (
-    <>
-      <div>
-        Welcome <h3>{person && person.name}</h3>
+    <div className="client-page">
+      <div className="client-page-content">
+        <div>
+          <p>Hello </p> <h3>{person && person.name} !</h3>
+        </div>
+        <>
+          <TaskManager />
+        </>
         {task && (
           <h3>
             {task.map((item) => (
-              <p key={item.id}>{item.name}</p>
+              <TaskDetails key={item._id} {...item} />
             ))}
           </h3>
         )}
-        <div>
-          {person && (
-            <div>
-              {person.note.map((item) => (
-                <div key={item._id}>{item.content}</div>
-              ))}
-            </div>
-          )}
-        </div>
+        <div></div>
       </div>
 
-      {data.length > 1 ? (
-        <div>
-          {data.map((item) => (
-            <TaskDetails key={item._id} {...item} />
-          ))}
-        </div>
-      ) : (
-        <h1>Loading...</h1>
-      )}
-
       <button onClick={logOut}>Log Out</button>
-    </>
+    </div>
   );
 }
 
-function TaskDetails({ _id, name, completed }) {
-  const { checkBoxFunc, complete } = useContext(AppContext);
+function TaskDetails({ _id, name, completed, status }) {
+  // const { checkBoxFunc, complete } = useContext(AppContext);
   const navigate = useNavigate();
   return (
     <div>
-      {" "}
       <div>
         <form style={{ display: "flex", alignItems: "center" }}>
-          <p>{name}</p>
-          <input
-            type="checkbox"
-            value={complete}
-            checked={completed}
-            onChange={(e) => checkBoxFunc(e)}
+          <p>{completed}</p>
+          <input type="checkbox" checked={completed} readOnly />
+          <p>{name} </p>
+
+          <p style={{ color: "green" }}>{status}</p>
+
+          <BiEdit
+            onClick={() => {
+              navigate(`/taskDetails/${_id}`);
+            }}
           />
 
-          <button
-            onClick={() => {
-              navigate(`/task/${_id}`);
-            }}
-          >
-            edit
-          </button>
-
-          <button> delete</button>
+          <RiDeleteBin6Line />
         </form>
       </div>
     </div>

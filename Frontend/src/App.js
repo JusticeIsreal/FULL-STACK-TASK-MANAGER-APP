@@ -30,7 +30,7 @@ function App() {
               </RequireAuth>
             }
           />
-          <Route path="/edit/:_id" element={<DynamicPage />} />
+          <Route path="/taskDetails/:_id" element={<DynamicPage />} />
         </Routes>
       </Router>
     </div>

@@ -2,6 +2,49 @@ const TaskSchema = require("../models/taskSchema");
 const UserSchema = require("../models/userSchema");
 const jwt = require("jsonwebtoken");
 
+// get single task
+const getTask = async (req, res) => {
+  try {
+    const { id: taskId } = req.params;
+    const auth = req.headers.authorization;
+
+    if (!auth || !auth.startsWith("Bearer ")) {
+      return res.status(401).json({ msg: "No token provided" });
+    }
+
+    const token = auth.split(" ")[1];
+    const userDetails = await jwt.verify(token, process.env.SECRET);
+    if (!userDetails) {
+      return res.status(401).json({ msg: "token is required" });
+    }
+
+    const user = await UserSchema.findOne({ _id: userDetails.id })
+      .populate({
+        path: "note",
+      })
+      .populate({
+        path: "task",
+      });
+
+    if (!user) {
+      return res.status(401).json({ msg: "user not found" });
+    }
+
+    const task = await TaskSchema.findOne({ _id: taskId });
+    if (!task) {
+      return res.status(404).json({ msg: "task not found" });
+    }
+
+    if (!task.user.equals(user._id)) {
+      return res.status(401).json({ msg: "unauthorized" });
+    }
+
+    res.status(200).json({ task });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+
 // post task
 const postTasks = async (req, res) => {
   try {
@@ -31,7 +74,7 @@ const postTasks = async (req, res) => {
       user: user._id,
     });
     const savedTask = await newTask.save();
-    user.task.push(savedTask);
+    user.task.unshift(savedTask);
     await user.save();
     res.status(200).json({ user });
   } catch (error) {
@@ -68,6 +111,7 @@ const updateTasks = async (req, res) => {
 
     const updatedTask = await TaskSchema.findByIdAndUpdate(
       req.params.id,
+      // console.log(req.params.id),
       req.body,
       {
         new: true,
@@ -75,7 +119,7 @@ const updateTasks = async (req, res) => {
       }
     );
 
-    res.status(200).json({ updatedTask });
+    res.status(200).json(updatedTask);
   } catch (error) {
     res.status(500).json({ msg: error.message });
   }
@@ -116,6 +160,7 @@ const deleteTasks = async (req, res) => {
 };
 
 module.exports = {
+  getTask,
   postTasks,
   deleteTasks,
   updateTasks,

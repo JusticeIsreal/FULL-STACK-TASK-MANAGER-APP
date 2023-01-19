@@ -1,7 +1,7 @@
 import { createContext, useReducer, useEffect, useState } from "react";
 import axios from "axios";
 import reducer from "./Reducer";
-import { Navigate  } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 // create context instance declearation
 const AppContext = createContext();
@@ -29,6 +29,8 @@ export const AppContextProvider = ({ children }) => {
   //   fetchTasks();
   // }, []);
 
+  // Register new user
+
   // task input fields
   const taskInput = (e) => {
     dispatch({ type: "TASK_INPUT", payload: e });
@@ -36,20 +38,29 @@ export const AppContextProvider = ({ children }) => {
   };
 
   // post task
-  const [error, setError] = useState("");
+  const [usertasks, setUsertasks] = useState([]);
+
   const postTask = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
+
+    const tokenSaved = localStorage.getItem("token");
+    const jsonData = JSON.parse(tokenSaved);
+    const token = jsonData.token;
+
     const freshTask = {
       name: state.newTask,
-      completed: false,
     };
     await axios
-      .post("http://localhost:1234/api/v1/tasks", freshTask)
+      .post("http://localhost:1234/api/v1/tasks", freshTask, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      })
       .then((resp) => console.log(resp.data))
-      .catch((errors) => setError(errors.response.data.msg));
+      .catch((errors) => setUsertasks(errors.response.data.msg));
 
-    // window.location.reload(true);
-    state.newTask = "";
+    window.location.reload(true);
+    state.usertasks = "";
   };
 
   // log out
@@ -81,7 +92,7 @@ export const AppContextProvider = ({ children }) => {
         data,
         taskInput,
         postTask,
-        error,
+        usertasks,
         logOut,
       }}
     >

@@ -3,7 +3,6 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 function LoginForm() {
-  const [user, setUser] = useState(false);
   const [errorMessage, setErrorMesssage] = useState("");
   const [useremail, setUseremail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,8 +19,10 @@ function LoginForm() {
         window.location.href = "./tasks";
       })
       .catch((error) => {
-        console.log(error.response.data.error);
         setErrorMesssage(error.response.data.error);
+        setTimeout(() => {
+          setErrorMesssage("");
+        }, 3000);
         throw error;
       });
   };
