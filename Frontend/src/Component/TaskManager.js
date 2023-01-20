@@ -11,6 +11,7 @@ function TaskManager() {
         type="text"
         value={newTask}
         onChange={(e) => taskInput(e)}
+        placeholder="Enter task"
       />
       <button className="task-input-submit-btn" onClick={(e) => postTask(e)}>
         SUBMIT

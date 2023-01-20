@@ -327,6 +327,12 @@ body {
   margin: 0 auto;
   margin-top: 20px;
 }
+.App .client-page .client-page-content .loading-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
 .App .client-page .client-page-content .client-tasks-main-con {
   display: flex;
   justify-content: flex-start;

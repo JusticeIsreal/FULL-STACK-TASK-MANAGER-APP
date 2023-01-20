@@ -49,13 +49,13 @@ function Task() {
       </>
       <div className="client-page-content">
         <>
-          {task && (
+          {task ? (
             <h3>
               {task.map((item) => (
                 <TaskDetails key={item._id} {...item} />
               ))}
             </h3>
-          )}
+          ):<h1 className="loading-text">Loading...</h1>}
         </>
 
         <div></div>

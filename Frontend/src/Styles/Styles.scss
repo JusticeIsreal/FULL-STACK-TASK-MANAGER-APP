@@ -357,6 +357,10 @@ $special-Color: #4c5eff;
       margin: 0 auto;
       margin-top: 20px;
 
+      .loading-text {
+        @include flexDisplay(center, center, row);
+      }
+
       .client-tasks-main-con {
         @include flexDisplay(flex-start, center, row);
         font-weight: normal;
