@@ -5,9 +5,16 @@ function TaskManager() {
   const { newTask, taskInput, postTask } = useContext(AppContext);
 
   return (
-    <form>
-      <input type="text" value={newTask} onChange={(e) => taskInput(e)} />
-      <button onClick={(e) => postTask(e)}>SUBMIT FORM</button>
+    <form className="task-input-form">
+      <input
+        className="task-input"
+        type="text"
+        value={newTask}
+        onChange={(e) => taskInput(e)}
+      />
+      <button className="task-input-submit-btn" onClick={(e) => postTask(e)}>
+        SUBMIT
+      </button>
     </form>
   );
 }

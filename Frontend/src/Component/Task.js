@@ -38,24 +38,28 @@ function Task() {
   }, []);
   return (
     <div className="client-page">
+      <div className="client-page-user">
+        <p>
+          Hello <h3>{person && person.name.toUpperCase()}</h3>
+        </p>
+        <button onClick={logOut}>Log Out</button>
+      </div>{" "}
+      <>
+        <TaskManager />
+      </>
       <div className="client-page-content">
-        <div>
-          <p>Hello </p> <h3>{person && person.name} !</h3>
-        </div>
         <>
-          <TaskManager />
+          {task && (
+            <h3>
+              {task.map((item) => (
+                <TaskDetails key={item._id} {...item} />
+              ))}
+            </h3>
+          )}
         </>
-        {task && (
-          <h3>
-            {task.map((item) => (
-              <TaskDetails key={item._id} {...item} />
-            ))}
-          </h3>
-        )}
+
         <div></div>
       </div>
-
-      <button onClick={logOut}>Log Out</button>
     </div>
   );
 }
@@ -63,25 +67,40 @@ function Task() {
 function TaskDetails({ _id, name, completed, status }) {
   // const { checkBoxFunc, complete } = useContext(AppContext);
   const navigate = useNavigate();
+
+  // let statusColor = {};
+
+  // if (status === "Open") {
+  //   statusColor = { color: "red" };
+  // } else {
+  //   statusColor = { color: "blue" };
+  // }
   return (
-    <div>
-      <div>
-        <form style={{ display: "flex", alignItems: "center" }}>
-          <p>{completed}</p>
-          <input type="checkbox" checked={completed} readOnly />
-          <p>{name} </p>
+    <div className="client-tasks-main-con">
+      <p
+        style={
+          status === "Open" ? { color: "#cc2e2e94" } : { color: "#0d62d89e" }
+        }
+        className="client-tasks-status"
+      >
+        {status}
+      </p>
+      {/* <input
+        type="checkbox"
+        checked={completed}
+        readOnly
+        className="client-tasks-completed-input"
+      /> */}
+      <p className="client-tasks-content">{name}</p>
 
-          <p style={{ color: "green" }}>{status}</p>
+      <BiEdit
+        className="client-tasks-edit-btn"
+        onClick={() => {
+          navigate(`/taskDetails/${_id}`);
+        }}
+      />
 
-          <BiEdit
-            onClick={() => {
-              navigate(`/taskDetails/${_id}`);
-            }}
-          />
-
-          <RiDeleteBin6Line />
-        </form>
-      </div>
+      <RiDeleteBin6Line className="client-tasks-delete-btn" />
     </div>
   );
 }

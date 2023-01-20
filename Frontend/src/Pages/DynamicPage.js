@@ -93,7 +93,7 @@ function DynamicPage() {
             <option value="open" key="open">
               Open
             </option>
-            <option value="close" key="close">
+            <option value="Close" key="Close">
               Close
             </option>
           </select>
