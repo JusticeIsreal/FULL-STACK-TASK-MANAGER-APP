@@ -382,8 +382,12 @@ $special-Color: #4c5eff;
         }
         .client-tasks-edit-btn,
         .client-tasks-delete-btn {
-          margin: 5px;
+          margin: 8px;
           transform: scale(1.3);
+          cursor: pointer;
+          &:hover {
+            transform: scale(1.5);
+          }
         }
         .client-tasks-edit-btn {
           color: #0d62d89e;

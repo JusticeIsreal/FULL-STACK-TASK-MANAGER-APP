@@ -40,7 +40,7 @@ function Task() {
     <div className="client-page">
       <div className="client-page-user">
         <p>
-          Hello <h3>{person && person.name.toUpperCase()}</h3>
+          Hello <b>{person && person.name.toUpperCase()}</b>
         </p>
         <button onClick={logOut}>Log Out</button>
       </div>{" "}
@@ -67,14 +67,27 @@ function Task() {
 function TaskDetails({ _id, name, completed, status }) {
   // const { checkBoxFunc, complete } = useContext(AppContext);
   const navigate = useNavigate();
+  //  localhost:1234/api/v1/tasks/63c2cd3f4ba2a057caec7291
 
-  // let statusColor = {};
+  // delete task
+  const deleteTask = async (_id) => {
+    const tokenSaved = localStorage.getItem("token");
+    const jsonData = JSON.parse(tokenSaved);
+    const token = jsonData.token;
+    await axios
+      .delete("http://localhost:1234/api/v1/tasks/" + `${_id}`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      })
 
-  // if (status === "Open") {
-  //   statusColor = { color: "red" };
-  // } else {
-  //   statusColor = { color: "blue" };
-  // }
+      .then((resp) => {
+        window.location.reload();
+      })
+      .catch((err) => {
+        throw err;
+      });
+  };
   return (
     <div className="client-tasks-main-con">
       <p
@@ -100,7 +113,10 @@ function TaskDetails({ _id, name, completed, status }) {
         }}
       />
 
-      <RiDeleteBin6Line className="client-tasks-delete-btn" />
+      <RiDeleteBin6Line
+        onClick={() => deleteTask(_id)}
+        className="client-tasks-delete-btn"
+      />
     </div>
   );
 }
