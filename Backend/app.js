@@ -2,15 +2,11 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 
-const data = require("./models/taskSchema");
+// const data = require("./models/taskSchema");
 require("dotenv").config();
 
 // import database configuration
 const connectTaskDB = require("./Databse/taskDB");
-
-// importing routers
-const taskRouter = require("./Route/taskRouter");
-const userRouter = require("./Route/userRoute");
 
 // middlewares
 app.use(express.urlencoded({ extended: false }));
@@ -19,6 +15,9 @@ app.use(express.json());
 //use basic cors
 app.use(cors());
 
+// importing routers
+const taskRouter = require("./Route/taskRouter");
+const userRouter = require("./Route/userRoute");
 // routes
 app.use("/api/v1/tasks", taskRouter);
 app.use("/api/v1/users", userRouter);

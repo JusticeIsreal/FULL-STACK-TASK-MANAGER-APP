@@ -9,9 +9,7 @@ const { ObjectId } = mongoose.Types;
 
 const getAllUsers = async (req, res) => {
   try {
-    // const body = req.body;
     const auth = req.headers.authorization;
-    // console.log(auth);
 
     if (!auth || !auth.startsWith("Bearer ")) {
       res.status(401).json({ msg: "token missing" });
@@ -20,7 +18,7 @@ const getAllUsers = async (req, res) => {
     const token = auth.split(" ")[1];
 
     const userData = jwt.verify(token, process.env.SECRET);
-    // console.log(userData);
+
     if (!userData) {
       return res.status(401).json({ msg: "token missing" });
     }
@@ -32,8 +30,6 @@ const getAllUsers = async (req, res) => {
       .populate({
         path: "task",
       });
-
-    // console.log(user);
 
     if (!user) {
       return res.status(404).json({ msg: "user not found" });

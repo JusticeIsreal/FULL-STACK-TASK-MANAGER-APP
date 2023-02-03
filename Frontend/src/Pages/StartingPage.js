@@ -1,10 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const appLogoBg =
-  "https://res.cloudinary.com/isreal/image/upload/v1662332718/My%20portfolio%20Project/AJIS_BOARD_hntwt3.png";
-const appLog =
-  "https://res.cloudinary.com/isreal/image/upload/v1673918222/banking%20app/AJIS_FILE_1_re65mc.png";
+
 function StartingPage() {
   return (
     <div className="starting-page">

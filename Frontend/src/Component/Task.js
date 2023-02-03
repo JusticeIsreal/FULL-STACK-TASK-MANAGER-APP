@@ -55,7 +55,9 @@ function Task() {
                 <TaskDetails key={item._id} {...item} />
               ))}
             </h3>
-          ):<h1 className="loading-text">Loading...</h1>}
+          ) : (
+            <h1 className="loading-text">Loading...</h1>
+          )}
         </>
 
         <div></div>
